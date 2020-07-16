@@ -22,12 +22,12 @@ class BSTNode:
     # Insert the given value into the tree
     def insert(self, value):
         if value < self.value: #then go left
-            if self.left is None:
+            if not self.left:
                 self.left = BSTNode(value)
             else:
                 self.left.insert(value)
-        else: #go right
-            if self.right is None:
+        elif value >= self.value: #go right
+            if not self.right:
                 self.right = BSTNode(value)
             else:
                 self.right.insert(value)
@@ -76,17 +76,38 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
-
+        #if there is a left value, keep going
+        if self.left:
+            self.left.in_order_print(self.left)
+        #if there is a right value keep going
+        print(self.value)
+        if self.right:
+            self.right.in_order_print(self.right)
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        from collections import deque
+        queue = deque()
+        queue.append(self)
+
+        while len(queue) > 0:
+            current = queue.popleft()
+
+            if current.left:
+                queue.append(current.left)
+            
+            if current.right:
+                queue.append(current.right)
+            
+            print(current.value)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
         pass
+
+
+
 
     # Stretch Goals -------------------------
     # Note: Research may be required
