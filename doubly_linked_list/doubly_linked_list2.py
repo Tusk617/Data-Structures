@@ -100,12 +100,20 @@ class DoublyLinkedList:
     List and inserts it as the new tail node of the List.
     """
     def move_to_end(self, node):
-        currentVal = node
+        movingNode = node
+        #Checking to see if the node is the head
+        if movingNode.prev is None:
+            #if it is the head, set the head.next to be the new head
+            movingNode.next = self.head
+            self.head.prev = None
+        #Check to see if the node is the tail
+        if movingNode.next is None:
+            self.tail.prev.next = movingNode
+            movingNode.prev = self.tail.prev
+            self.delete(self.tail)
+            self.add_to_tail(movingNode)
+            
 
-        if currentVal.prev is None:
-            currentVal.next = self.head
-        elif currentVal.next is None:
-            self.add_to_tail(currentVal)
 
 
         # if currentVal is not None:
