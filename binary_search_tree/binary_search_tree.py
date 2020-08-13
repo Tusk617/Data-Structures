@@ -78,36 +78,76 @@ class BSTNode:
 
     # Part 2 -----------------------
 
-#     # Print all the values in order from low to high
-#     # Hint:  Use a recursive, depth first traversal
-#     def in_order_print(self):
-#         pass
+    # Print all the values in order from low to high
+    # Hint:  Use a recursive, depth first traversal
+    def in_order_print(self, node):
+        # pass
 
-#     # Print the value of every node, starting with the given node,
-#     # in an iterative breadth first traversal
-#     def bft_print(self):
-#         pass
+        if self.left:
+            self.left.in_order_print(self.left)
 
-#     # Print the value of every node, starting with the given node,
-#     # in an iterative depth first traversal
-#     def dft_print(self):
-#         pass
+        print(self.value)
+        if self.right:
+            self.right.in_order_print(self.left)
 
-#     # Stretch Goals -------------------------
-#     # Note: Research may be required
+        # print(self.value)
 
-#     # Print Pre-order recursive DFT
-#     def pre_order_dft(self):
-#         pass
+    # Print the value of every node, starting with the given node,
+    # in an iterative breadth first traversal
+    def bft_print(self, node):
+        # pass
+        #TK said to utilize a queue, so i'm going to add that in.
+        from collections import deque
+        queue = deque()
+        queue.append(self)
 
-#     # Print Post-order recursive DFT
-#     def post_order_dft(self):
-#         pass
+        while len(queue) > 0:
+            #at the start of each loop, remove the item at the front of the queue
+            current = queue.popleft()
+
+            #if there is a left or right value, add it to the queue
+            if current.left:
+                queue.append(current.left)
+            if current.right:
+                queue.append(current.right)
+            
+            print(current.value)
+
+    # Print the value of every node, starting with the given node,
+    # in an iterative depth first traversal
+    def dft_print(self, node):
+        # pass
+
+        stack = []
+        stack.append(node)
+
+        while len(stack) > 0:
+            current = stack.pop()
+            #going through the tree, and adding each node to the stack-list, starting from the given node
+            #checking the left branch
+            if current.right:
+                stack.append(current.right)
+            #checking the right branch
+            if current.left:
+                stack.append(current.left)
+            #print the current value, then loop again
+            print(current.value)
+
+    # Stretch Goals -------------------------
+    # Note: Research may be required
+
+    # Print Pre-order recursive DFT
+    # def pre_order_dft(self):
+    #     pass
+
+    # # Print Post-order recursive DFT
+    # def post_order_dft(self):
+    #     pass
 
 # """
 # This code is necessary for testing the `print` methods
 # """
-# bst = BinarySearchTree(1)
+# bst = BSTNode(1)
 
 # bst.insert(8)
 # bst.insert(5)
